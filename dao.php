@@ -11,9 +11,10 @@ class Database
             return $db;
         } else {
             echo "LOCALHOST DB";
-            $dsn = "mysql:dbname=training;host=192.168.64.2;port=3306";
-            $user = "training";
-            $pwd = "Test1234";
+           // $dsn = "mysql:dbname=dev;host=192.168.64.2;port=3306";
+            $dsn = "mysql:dbname=dev;host=127.0.0.1;port=3306";
+            $user = "devuser";
+            $pwd = "Dev1234$";
             $db = new PDO($dsn, $user, $pwd);
 
             return $db;
@@ -21,7 +22,7 @@ class Database
     }
 
     public function query($query) {
-        $db = $this->getConn(1);
+        $db = $this->getConn(2);
         $stmt = $db->query($query);
 
         return $stmt;
@@ -49,7 +50,12 @@ class Database
     }
    
 }
-
+$db = new Database(2);
+$rows = $db->query("SELECT * FROM users")->fetchAll();
+foreach ($rows as $row)
+{
+    echo $row['username'];
+}
 ?>
 
 
