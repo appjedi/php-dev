@@ -48,7 +48,6 @@ class Database
             echo $row['username'] . "<br />\n";
         }
     }
-   
 }
 $db = new Database(2);
 $rows = $db->query("SELECT * FROM users")->fetchAll();
