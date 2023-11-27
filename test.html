@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script>
+      async function testId() {
+        const data = {
+          name: "Bob Tester",
+          email: "bob@test.com",
+          amount: 100.01,
+          values: [{ val: 1 }, { val: 2 }],
+        };
+        $.post("index.php", data, (resp) => {
+          console.log(resp);
+          alert(resp);
+        });
+      }
+      async function testIdFetch() {
+        const data = {
+          name: "Bob Tester",
+          email: "bob@test.com",
+          amount: 100.01,
+        };
+        const resp = await fetch("index.php", {
+          method: "post",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: { data: JSON.stringify(data) },
+        });
+        const text = await resp.text();
+        console.log(text);
+      }
+    </script>
+  </head>
+  <body>
+    <button onClick="testId()">Test</button>
+  </body>
+</html>
