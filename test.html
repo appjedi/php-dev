@@ -8,13 +8,34 @@
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+  </head>
+  <body>
+    <form method="post" action="index.php">
+      <p>Name: <input type="text" id="fullName" name="fullName" /></p>
+      <p>Email: <input type="email" id="email" name="email" /></p>
+      <p>Amount: <input type="number" id="amount" name="amount" /></p>
+      <p><input type="hidden" id="values" name="values" /></p>
+      <p><button>Submit</button></p>
+    </form>
+    <button onClick="testId()">Test</button>
+
     <script>
+      const values = [
+        { id: 1, name: "Item 1" },
+        { id: 2, name: "Item 2" },
+        { id: 3, name: "Item 3" },
+      ];
+      document.getElementById("values").value = JSON.stringify(values);
       async function testId() {
         const data = {
-          name: "Bob Tester",
+          name: document.getElementById("fullName").value,
           email: "bob@test.com",
           amount: 100.01,
-          values: [{ val: 1 }, { val: 2 }],
+          values: [
+            { id: 1, name: "Item 1" },
+            { id: 2, name: "Item 2" },
+            { id: 3, name: "Item 3" },
+          ],
         };
         $.post("index.php", data, (resp) => {
           console.log(resp);
@@ -23,7 +44,7 @@
       }
       async function testIdFetch() {
         const data = {
-          name: "Bob Tester",
+          fullName: "Bob Tester",
           email: "bob@test.com",
           amount: 100.01,
         };
@@ -39,8 +60,5 @@
         console.log(text);
       }
     </script>
-  </head>
-  <body>
-    <button onClick="testId()">Test</button>
   </body>
 </html>
